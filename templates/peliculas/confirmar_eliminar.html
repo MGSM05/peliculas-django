@@ -1,0 +1,16 @@
+<!-- templates/peliculas/confirmar_eliminar.html -->
+{% extends "base.html" %}
+
+{% block title %}Eliminar película{% endblock %}
+
+{% block content %}
+<h2>Eliminar película</h2>
+<p>¿Estás seguro de que quieres eliminar <strong>{{ pelicula.titulo }}</strong>?</p>
+<p>Esta acción no se puede deshacer.</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+    <a href="{% url 'detalle_pelicula' pelicula.pk %}">Cancelar</a>
+</form>
+{% endblock content %}
