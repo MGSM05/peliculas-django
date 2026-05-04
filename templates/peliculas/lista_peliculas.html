@@ -1,0 +1,21 @@
+<!-- templates/peliculas/lista_peliculas.html -->
+{% extends "base.html" %}
+
+{% block title %}Catálogo de Películas{% endblock %}
+
+{% block content %}
+<h2>Catálogo de Películas</h2>
+
+{% if peliculas %}
+    {% for pelicula in peliculas %}
+        <div>
+            <h3><a href="{{ pelicula.get_absolute_url }}">{{ pelicula.titulo }}</a></h3>
+            <p>{{ pelicula.genero }}</p>
+            <p>{{ pelicula.sinopsis|truncatewords:20 }}</p>
+            <p>Añadida por <strong>{{ pelicula.autor }}</strong></p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay películas todavía.</p>
+{% endif %}
+{% endblock content %}
