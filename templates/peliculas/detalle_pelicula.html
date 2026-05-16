@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pelicula-detalle">
+    <h2>{{ pelicula.titulo }}</h2>
+    <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+    <p><strong>Sinopsis:</strong> {{ pelicula.sinopsis }}</p>
+    <p><strong>Añadida por:</strong> {{ pelicula.autor }}</p>
+    <p><strong>Fecha:</strong> {{ pelicula.fecha_creacion|date:"d/m/Y" }}</p>
+
+    {% if user == pelicula.autor or user.is_staff %}
+    <a href="{% url 'editar_pelicula' pelicula.pk %}">Editar</a>
+    <a href="{% url 'eliminar_pelicula' pelicula.pk %}">Eliminar</a>
+    {% endif %}
+
+    <a href="{% url 'lista_peliculas' %}">← Volver al catálogo</a>
+</div>
+{% endblock content %}

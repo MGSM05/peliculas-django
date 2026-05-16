@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Catálogo de Películas</h2>
+
+{% for pelicula in peliculas %}
+<div class="pelicula-card">
+    <h3><a href="{{ pelicula.get_absolute_url }}">{{ pelicula.titulo }}</a></h3>
+    <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+    <p><strong>Añadida por:</strong> {{ pelicula.autor }}</p>
+</div>
+{% empty %}
+<p>No hay películas todavía. ¡Añade la primera!</p>
+{% endfor %}
+
+{% endblock content %}
