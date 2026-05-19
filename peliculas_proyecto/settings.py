@@ -128,3 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'lista_peliculas'          # iremos a la lista después de login
 LOGOUT_REDIRECT_URL = 'lista_peliculas'
 LOGIN_URL = 'login'                             # página de login por defecto
+
+# Archivos multimedia
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
