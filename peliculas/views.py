@@ -10,13 +10,24 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Pelicula
+from django.db.models import Q
 
-# --- Lista de todas las películas ---
+# --- Lista de todas las películas con búsqueda---
 class VistaListaPeliculas(ListView):
     model = Pelicula
     template_name = "peliculas/lista_peliculas.html"
     context_object_name = "peliculas"
     ordering = ["-fecha_creacion"]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        consulta = self.request.GET.get("q")  # capturamos el parámetro de búsqueda
+        if consulta:
+            queryset = queryset.filter(
+                Q(titulo__icontains=consulta) |   # busca en el título
+                Q(sinopsis__icontains=consulta)   # o en la sinopsis
+            )
+        return queryset
 
 
 # --- Detalle de una película ---
