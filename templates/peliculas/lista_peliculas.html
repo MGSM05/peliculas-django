@@ -2,7 +2,11 @@
 
 {% block content %}
 <h2>Catálogo de Películas</h2>
-
+<!-- Formulario de búsqueda -->
+<form method="GET" action="">
+    <input type="text" name="q" placeholder="Buscar película..." value="{{ request.GET.q }}">
+    <br><br><button type="submit">Buscar</button>
+</form><br>
 {% for pelicula in peliculas %}
 <div class="pelicula-card">
     <h3><a href="{{ pelicula.get_absolute_url }}">{{ pelicula.titulo }}</a></h3>
