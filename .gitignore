@@ -1,7 +1,8 @@
 # Entorno virtual
 .venv/
+venv/
 
-# Caché de Python
+# Python
 __pycache__/
 *.pyc
 *.pyo
@@ -9,9 +10,8 @@ __pycache__/
 # Base de datos
 db.sqlite3
 
-# Archivos de sistema
-.DS_Store
-Thumbs.db
-
 # Variables de entorno
 .env
+
+# VSCode
+.vscode/

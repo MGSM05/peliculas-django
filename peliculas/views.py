@@ -11,35 +11,34 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Pelicula
 
-
-# ── Lista de todas las películas ──────────────────────────────────────────────
+# --- Lista de todas las películas ---
 class VistaListaPeliculas(ListView):
     model = Pelicula
     template_name = "peliculas/lista_peliculas.html"
-    context_object_name = "peliculas"       # nombre de la variable en la plantilla, que representa a la película actual
-    ordering = ["-fecha_creacion"]          # más recientes primero
+    context_object_name = "peliculas"
+    ordering = ["-fecha_creacion"]
 
 
-# ── Detalle de una película ────────────────────────────────────────────────────
+# --- Detalle de una película ---
 class VistaDetallePelicula(DetailView):
     model = Pelicula
     template_name = "peliculas/detalle_pelicula.html"
-    context_object_name = "pelicula" 
+    context_object_name = "pelicula"
 
 
-# ── Crear nueva película (solo usuarios autenticados) ─────────────────────────
+# --- Crear una película ---
 class VistaCrearPelicula(LoginRequiredMixin, CreateView):
     model = Pelicula
     template_name = "peliculas/form_pelicula.html"
     fields = ["titulo", "sinopsis", "genero"]
 
     def form_valid(self, form):
-        form.instance.autor = self.request.user  # asignamos el usuario logueado
+        form.instance.autor = self.request.user
         messages.success(self.request, "Película añadida correctamente.")
         return super().form_valid(form)
 
 
-# ── Editar una película (solo el autor o staff/superuser) ─────────────────────
+# --- Editar una película ---
 class VistaActualizarPelicula(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Pelicula
     template_name = "peliculas/form_pelicula.html"
@@ -58,7 +57,7 @@ class VistaActualizarPelicula(LoginRequiredMixin, UserPassesTestMixin, UpdateVie
         return super().form_valid(form)
 
 
-# ── Eliminar una película (solo el autor o staff/superuser) ───────────────────
+# --- Eliminar una película ---
 class VistaEliminarPelicula(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Pelicula
     template_name = "peliculas/confirmar_eliminar.html"

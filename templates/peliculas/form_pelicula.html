@@ -1,20 +1,11 @@
-<!-- templates/peliculas/form_pelicula.html -->
-<!-- Se reutiliza tanto para crear como para editar -->
 {% extends "base.html" %}
 
-{% block title %}
-    {% if object %}Editar película{% else %}Nueva película{% endif %}
-{% endblock %}
-
 {% block content %}
-<h2>{% if object %}Editar: {{ object.titulo }}{% else %}Añadir nueva película{% endif %}</h2>
-
-<form action="" method="post">
+<h2>{{ view.object|yesno:"Editar película,Nueva película" }}</h2>
+<form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">
-        {% if object %}Guardar cambios{% else %}Añadir película{% endif %}
-    </button>
+    <button type="submit">Guardar</button>
     <a href="{% url 'lista_peliculas' %}">Cancelar</a>
 </form>
 {% endblock content %}
