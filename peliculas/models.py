@@ -8,6 +8,7 @@ class Pelicula(models.Model):
     titulo = models.CharField(max_length=200)                  # texto corto
     sinopsis = models.TextField()                              # texto largo
     genero = models.CharField(max_length=100)
+    cartel = models.ImageField(upload_to='carteles/', blank=True, null=True) 
     
     # Fecha automática
     fecha_creacion = models.DateTimeField(auto_now_add=True)
