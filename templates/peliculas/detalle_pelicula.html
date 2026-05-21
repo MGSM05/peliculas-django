@@ -3,6 +3,11 @@
 {% block content %}
 <div class="pelicula-detalle">
     <h2>{{ pelicula.titulo }}</h2>
+
+{% if pelicula.cartel %}
+<img src="{{ pelicula.cartel.url }}" alt="Cartel de {{ pelicula.titulo }}" style="max-width: 300px;">
+{% endif %}
+
     <p><strong>Género:</strong> {{ pelicula.genero }}</p>
     <p><strong>Sinopsis:</strong> {{ pelicula.sinopsis }}</p>
     <p><strong>Añadida por:</strong> {{ pelicula.autor }}</p>

@@ -41,7 +41,7 @@ class VistaDetallePelicula(DetailView):
 class VistaCrearPelicula(LoginRequiredMixin, CreateView):
     model = Pelicula
     template_name = "peliculas/form_pelicula.html"
-    fields = ["titulo", "sinopsis", "genero"]
+    fields = ["titulo", "sinopsis", "genero", "cartel"] 
 
     def form_valid(self, form):
         form.instance.autor = self.request.user
@@ -53,7 +53,7 @@ class VistaCrearPelicula(LoginRequiredMixin, CreateView):
 class VistaActualizarPelicula(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Pelicula
     template_name = "peliculas/form_pelicula.html"
-    fields = ["titulo", "sinopsis", "genero"]
+    fields = ["titulo", "sinopsis", "genero", "cartel"]
 
     def test_func(self):
         pelicula = self.get_object()
